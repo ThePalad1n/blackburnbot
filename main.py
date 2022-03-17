@@ -86,27 +86,6 @@ async def hmp(ctx):
         await ctx.message.channel.send('UNLIMITED POWER!')
         return
 
-
-#patCount = 0
-#sill cmd for bot reward
-@bot.command(name='goodboi', help='Reward the bot for a good job')
-async def goodboi(ctx):
-    #patCount =+ 1
-    if ctx.message.content.startswith('re goodboi'):
-        await ctx.message.channel.send('*Pat Pat*')
-        #await ctx.message.channel.send('Sir Doge has been praised %d times!' % (patCount))
-        return
-
-"""
-#inspiration command from api
-@bot.command(name='inspire',
-             help='Tells the bot to send an inspirational quote')
-async def inspire(ctx):
-    if ctx.message.content.startswith('re inspire'):
-        await ctx.channel.send(get_quote())
-        return
-"""
-
 #fun little dice roll
 @bot.command(name='rolld20', help='rolls a d20 to test your luck')
 async def rolld20(ctx):
@@ -128,30 +107,6 @@ async def rolld20(ctx):
             await ctx.message.channel.send("Eeeeelllllsssss Nat 1")
         else:
             await ctx.message.channel.send("Huh thats not supposed to happen")
-        return
-
-
-#silly meme cmd
-@bot.command(name='bingbong', help='Fuck ya Life')
-async def bingbong(ctx):
-    if ctx.message.content.startswith('re bingbong'):
-        await ctx.message.channel.send('Fuck ya Life!')
-        return
-
-
-#silly meme cmd
-@bot.command(name='backflip', help='another meme cmd')
-async def backflip(ctx):
-    if ctx.message.content.startswith('re backflip'):
-        await ctx.message.channel.send('Dogs dont do backflips')
-        return
-
-
-#silly meme cmd
-@bot.command(name='mom', help='another meme cmd')
-async def mom(ctx):
-    if ctx.message.content.startswith('re mom'):
-        await ctx.message.channel.send('Your mom')
         return
 
 
