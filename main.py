@@ -62,7 +62,7 @@ async def b(ctx):
 async def pushP(ctx):
     print('We have logged in as {0.user}'.format(client))
     await bot.change_presence(activity=discord.Streaming(
-        name='Runescape', url='https://www.youtube.com/watch?v=dQw4w9WgXcQ'))
+        name='Catan', url='https://www.youtube.com/watch?v=dQw4w9WgXcQ'))
 
 
 @client.event
@@ -78,13 +78,6 @@ async def barps(ctx, members: commands.Greedy[discord.Member]):
     await ctx.message.channel.send('NO NIKHIL!')
     await ctx.send('Nikhil just got slapped by Barps!')
 
-
-#silly starwars meme cmd
-@bot.command(name='hmp', help='unlimited power meme')
-async def hmp(ctx):
-    if ctx.message.content.startswith('re hmp'):
-        await ctx.message.channel.send('UNLIMITED POWER!')
-        return
 
 #fun little dice roll
 @bot.command(name='rolld20', help='rolls a d20 to test your luck')
@@ -361,15 +354,12 @@ async def plshelp(ctx):
     )
 
 
-#could also modify the roles to be dependant of specific users modifiers
-#additionally could simplify with having the max range as a var and take the cmd number
 
 #=========================================================================
 
 #imgflippy
-
-username = 'ThePalad1n'
-password = 'AlphaBeta321!'
+username = os.getenv('MEME_USER')
+password = os.getenv('MEME_PASS')
 
 userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'
 
