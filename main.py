@@ -332,7 +332,7 @@ async def d2(ctx):
         await ctx.message.channel.send("You rolled a % d " % (value))
         await ctx.message.channel.send("Add modifiers")
 
-
+"""
 dndBaseURL = "https://www.dnd5eapi.co/api/"
 
 
@@ -353,7 +353,7 @@ async def plshelp(ctx):
         "Subclass help will be added soon. For now just follow last entry with /yoursubsearch \n"
     )
 
-
+"""
 
 #=========================================================================
 
