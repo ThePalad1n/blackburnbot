@@ -445,7 +445,11 @@ async def makememe(ctx, id: int, text0: str, text1: str):
 
 
 
-#####
+
+
+################################################################################
+#beginning of econ
+      
 amounts = {}
 
 @bot.event
@@ -462,9 +466,19 @@ async def on_ready():
 async def balance(ctx):
     id = ctx.message.author.id
     if id in amounts:
-       await ctx.message.channel.send("You have {} in the bank".format(amounts[id]))
+       await ctx.message.channel.send("You have {} brianbucks in the bank".format(amounts[id]))
     else:
         await ctx.message.channel.send("You dont have an account")
+
+@bot.command(pass_context=True)
+async def invest(ctx):
+    id = ctx.message.author.id
+    if id in amounts:
+      await ctx.message.channel.send("You earned 50 brianbucks")
+      amounts[id] += 50 
+    else:
+        await ctx.message.channel.send("error")
+
 
 @bot.command(pass_context=True)
 async def register(ctx):
@@ -500,7 +514,10 @@ def _save():
 async def save():
     _save()
 
-#####
+  
+#end  of econ
+#################################################################################
+
 
 keep_alive()
 bot.run(os.getenv('TOKEN'))
