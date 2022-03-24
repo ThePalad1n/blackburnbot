@@ -19,7 +19,7 @@ bot = commands.Bot(command_prefix='re ', intents=intents)
 @bot.command(name='rarity', help='List of quotes and how rare')
 async def rarity(ctx):
     if ctx.message.content.startswith('re rarity'):
-      await ctx.message.channel.send("Total: 88\n Common: 29\n Uncommon: 19\n Rare: 15\n Epic: 11\n Legendary: 8\n God: 3\n Hidden: ???\n")
+      await ctx.message.channel.send("Total: 90\n Common: 29\n Uncommon: 19\n Rare: 15\n Epic: 11\n Legendary: 8\n God: 3\n Hidden: ???\n")
 
 
 @bot.command(name='b', help='The quotes youve always wanted')
@@ -33,24 +33,28 @@ async def b(ctx):
     
     if (y == 7):
         await ctx.message.channel.send(x + " (Secret Rare)\n")
-        q = random.randint(1, 3)
+        q = random.randint(1, 5)
         if (q == 1):
             await ctx.message.channel.send(file=discord.File("brianmemeemail.jpeg"))
         elif (q == 2):
             await ctx.message.channel.send(file=discord.File("8ball meme.jpeg"))
         elif (q == 3):
             await ctx.message.channel.send(file=discord.File("fightme.jpeg"))
+        elif (q == 4):
+            await ctx.message.channel.send(file=discord.File("beach1.jpeg"))
+        elif (q == 5):
+            await ctx.message.channel.send(file=discord.File("patty1.jpeg"))
         else:
             return 0;
     elif(y == 1):
         await ctx.message.channel.send(x + " (Common)")
-    elif(y == 2):
+    elif(y == 2): 
         await ctx.message.channel.send(x + " (Uncommon)")
     elif(y == 3):
         await ctx.message.channel.send(x + " (Rare)")
     elif(y == 4):
         await ctx.message.channel.send(x + " (Epic)")
-    elif(y == 5):
+    elif(y == 5):   
         await ctx.message.channel.send(x + " (Legendary)")
     elif(y == 6):
         await ctx.message.channel.send(x + " (Godly)")
@@ -439,6 +443,64 @@ async def makememe(ctx, id: int, text0: str, text1: str):
         await ctx.message.channel.send('Memeo CompleteO ')
 
 
+
+
+#####
+amounts = {}
+
+@bot.event
+async def on_ready():
+    global amounts
+    try:
+        with open('amounts.json') as f:             
+            amounts = json.load(f)
+    except FileNotFoundError:
+        print("Could not load amounts.json")
+        amounts = {}
+
+@bot.command(pass_context=True)
+async def balance(ctx):
+    id = ctx.message.author.id
+    if id in amounts:
+       await ctx.message.channel.send("You have {} in the bank".format(amounts[id]))
+    else:
+        await ctx.message.channel.send("You dont have an account")
+
+@bot.command(pass_context=True)
+async def register(ctx):
+    id = ctx.message.author.id
+    if id not in amounts:
+        amounts[id] = 100
+        await ctx.message.channel.send("You are now registered")
+        _save()
+    else:
+        await ctx.message.channel.send("You already have an account")
+
+@bot.command(pass_context=True)
+async def transfer(ctx, amount: int, other: discord.Member):
+    primary_id = ctx.message.author.id
+    other_id = other.id
+    if primary_id not in amounts:
+        await ctx.message.channel.send("You do not have an account")
+    elif other_id not in amounts:
+        await ctx.message.channel.send("The other party does not have an account")
+    elif amounts[primary_id] < amount:
+        await ctx.message.channel.send("You cannot afford this transaction")
+    else:
+        amounts[primary_id] -= amount
+        amounts[other_id] += amount
+        await ctx.message.channel.send("Transaction complete")
+    _save()
+
+def _save():
+    with open('amounts.json', 'w+') as f:
+        json.dump(amounts, f)
+
+@bot.command()
+async def save():
+    _save()
+
+#####
 
 keep_alive()
 bot.run(os.getenv('TOKEN'))
